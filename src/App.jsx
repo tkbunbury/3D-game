@@ -13,12 +13,13 @@ function App() {
   return (
     <BrowserRouter>
       <>
-      <Routes>
-        <Route path='/' element={<LoginPage/>}/>
-        <Route path='/leaderboard' element={<Leaderboard/>}/>
-        <Route path='/startscreen' element={<StartScreen/>}/>
-        <Route path='/finalscore' element={<FinalScore/>}/>
-      </Routes>  
+        <h1 className="game-title">3D Game</h1>
+          <Routes>
+            <Route path='/' element={<LoginPage/>}/>
+            <Route path='/leaderboard' element={<Leaderboard/>}/>
+            <Route path='/startscreen' element={<StartScreen/>}/>
+            <Route path='/finalscore' element={<FinalScore/>}/>
+          </Routes>  
       </>
     </BrowserRouter>
   )
