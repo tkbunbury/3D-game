@@ -2,11 +2,12 @@ import { useState } from "react";
 import './SignupForm.css'
 
 function SignupForm({ onSubmit }) {
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
-
+    
     const handleSubmit = (event) => {
         event.preventDefault();
         if (password !== confirmPassword) {
@@ -18,7 +19,9 @@ function SignupForm({ onSubmit }) {
         setPassword('');
         setConfirmPassword('');
         setError('');
+        
     };
+    
 
     return (
     <form className="login-form" onSubmit={handleSubmit}>
