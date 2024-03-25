@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import './App.css'
 import LoginPage from './components/LoginPage/LoginPage'
@@ -12,15 +11,15 @@ function App() {
 
   return (
     <BrowserRouter>
-      <>
+      <div className="container">
         <h1 className="game-title">3D Game</h1>
-          <Routes>
-            <Route path='/' element={<LoginPage/>}/>
-            <Route path='/leaderboard' element={<Leaderboard/>}/>
-            <Route path='/startscreen' element={<StartScreen/>}/>
-            <Route path='/finalscore' element={<FinalScore/>}/>
-          </Routes>  
-      </>
+            <Routes>
+              <Route path='/' element={<LoginPage/>}/>
+              <Route path='/leaderboard' element={<Leaderboard/>}/>
+              <Route path='/startscreen' element={<StartScreen/>}/>
+              <Route path='/finalscore' element={<FinalScore/>}/>
+            </Routes>  
+      </div>
     </BrowserRouter>
   )
 }
