@@ -1,5 +1,17 @@
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+}
+
 .game-title {
-  position: absolute; 
+  position: fixed; 
   top: 0; 
   left: 0; 
   width: 100%; 
@@ -7,4 +19,6 @@
   font-size: 48px; 
   color: whitesmoke; 
   z-index: 1000; 
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
