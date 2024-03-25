@@ -5,23 +5,27 @@ import LoginButton from './LoginButton/LoginButton';
 import SignupForm from './SignupForm/SignupForm';
 import LoginForm from './LoginForm/LoginForm';
 
-function LoginPage() {
+function LoginPage({ isCreatingAccount, setIsCreatingAccount }) {
     const [showSignupForm, setShowSignupForm] = useState(false);
     const [showLoginForm, setShowLoginForm] = useState(false);
+    
+    const [username, setUsername] = useState('');
     const navigate = useNavigate();
 
     const handleNewUserClick = () => {
         setShowSignupForm(true);
         setShowLoginForm(false);
+        setIsCreatingAccount(true);
     };
 
     const handleLoginClick = () => {
         setShowSignupForm(false);
         setShowLoginForm(true);
+        setIsCreatingAccount(false);
     };
 
     const handleGuestClick = () => {
-        navigate('/startscreen'); 
+        navigate('/startscreen/Guest'); 
     };
 
     const handleLeaderboardClick = () => {
@@ -31,11 +35,15 @@ function LoginPage() {
     const handleNewUserSubmit = (username, password) => {
         console.log("Form submitted. Username:", username, "Password:", password);
         console.log('Creating new user:', username, password);
+        setUsername(username);
+        navigate(`/startscreen/${username}`);
     };
 
     const handleLoginSubmit = (username, password) => {
         console.log("Form submitted. Username:", username, "Password:", password);
         console.log('Logging in:', username, password);
+        setUsername(username);
+        navigate(`/startscreen/${username}`);
 
     };
 
