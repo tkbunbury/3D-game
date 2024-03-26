@@ -1,0 +1,50 @@
+.leaderboard {
+    margin: auto;
+    padding: 20px;
+    max-width: 800px;
+}
+
+.leaderboard-title {
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border: 5px solid #007bff;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+    padding: 10px;
+    border-bottom: 2px solid #ddd;
+}
+
+.leaderboard-table th {
+    text-align: left;
+    background-color: #14d32e;
+}
+
+.leaderboard-table tr:hover {
+    background-color: #5c5959;
+}
+
+.back-button,
+.logout-button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover,
+.logout-button:hover {
+    background-color: #0056b3;
+}
