@@ -1,0 +1,8 @@
+.game {
+  width: 80vw;
+  height: 80vh;
+  overflow: hidden;
+  margin: 0;
+  border-style: solid;
+  border-width: 10px;
+}

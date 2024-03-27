@@ -14,7 +14,7 @@ function StartScreen({ isCreatingAccount }) {
         <div className="start-screen">
             <h1>{isCreatingAccount ? "Welcome" : "Welcome back"} {username}</h1>
             {(username !== "Guest") && <p>Your high score is: ...</p>}
-            <button className="take-flight-button">Take Flight</button>
+            <button className="take-flight-button" onClick={() => navigate('/game')}>Take Flight</button>
             <button className="logout-button" onClick={handleLogout}>Logout</button>
             <button className="leaderboard-button" onClick={() => navigate('/leaderboard')}>
                 Go to Leaderboard
