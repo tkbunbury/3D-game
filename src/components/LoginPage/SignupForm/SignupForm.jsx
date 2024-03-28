@@ -22,7 +22,7 @@ function SignupForm({ onSubmit }) {
             setError('Passwords do not match. Please retype.');
             return;
         }
-        createUserWithEmailAndPassword(auth, email, password);
+        createUserWithEmailAndPassword(auth, email, password)
 		const userRef = await doc(db, "scores", email);
 		setDoc(userRef, {
 			highscore: 0,

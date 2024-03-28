@@ -25,8 +25,6 @@ function Leaderboard() {
 		navigate("/");
 	};
 
-	console.log(user.username, "currentUser")
-
 	return (
 		<div className="leaderboard">
 			<h1 className="leaderboard-title">Leaderboard</h1>
