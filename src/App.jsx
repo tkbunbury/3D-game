@@ -1,20 +1,21 @@
-import { Routes, Route, BrowserRouter, Link } from 'react-router-dom'
+import { Routes, Route, Link, UNSAFE_useRouteId } from 'react-router-dom'
 import { useState } from 'react';
 import LoginPage from './components/LoginPage/LoginPage'
 import Leaderboard from './components/Leaderboard/Leaderboard'
 import StartScreen from './components/StartScreen/StartScreen'
 import FinalScore from './components/FinalScore/FinalScore'
 import GameIndex from './components/Game/GameIndex';
+import { useUser } from './Contexts/UserContext/userContext';
 
 function App() {
+  const { user } = useUser()
 
   const [isCreatingAccount, setIsCreatingAccount] = useState(false);
   
   return (
-    <BrowserRouter>
       <div className="container">
         <Link to="/">
-        <h1 className="game-title">Hangman Heaven</h1>
+        <h1 className="game-title">Hangman Heaven {"-" + " " + user.username}</h1>
         </Link>
             <Routes>
               <Route path='/' element={<LoginPage setIsCreatingAccount={setIsCreatingAccount} isCreatingAccount={isCreatingAccount}/>} />
@@ -24,7 +25,6 @@ function App() {
               <Route path='/game' element={<GameIndex/>}/>
             </Routes>  
       </div>
-    </BrowserRouter>
   )
 }
 
