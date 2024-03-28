@@ -1,41 +1,29 @@
 import { Text3D } from "@react-three/drei";
 import { extend } from '@react-three/fiber'
 import { useFrame } from "@react-three/fiber";
-import { useState, useMemo } from "react";
-import { Vector3 } from "three";
+import { useMemo } from "react";
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js'
-
+import compareArrays from "../../utils/array-compare";
 
 extend({ TextGeometry })
 
-function randomPoint(scale){
-    return new Vector3(
-        Math.random() * 2 - 1,
-        Math.random() * 2 - 1,
-        Math.random() * 2 - 1
-        ).multiply(scale || new Vector3(1, 1, 1));
-}
-
-const TARGET_RAD = 0.08;
-const alphabet = ['A','B','C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+const TARGET_RAD = 0.09;
 
 export function Targets(props){
     const { planePosition } = props;
-    const [targets, setTargets] = useState(() => {
-        const arr = [];
-        for (let i = 0; i < alphabet.length; i++) {
-          arr.push({
-            center: randomPoint(new Vector3(4, 1, 4)).add(
-              new Vector3(0, 2 + Math.random() * 2, 0)
-            ),
-            direction: randomPoint().normalize(),
-            hit: false,
-            id: alphabet[i]
-          });
-        }
-    
-        return arr;
-      });
+    const { newGuess } = props;
+    const { setNewGuess } = props;
+    const { guessesArray } = props;
+    const { setGuessesArray } = props;
+    const { gameBoardState } = props;
+    const { setGameBoardState } = props;
+    const { wordToGuess } = props;
+    const { lives } = props;
+    const { setLives } = props;
+    const { currentScore } = props;
+    const { setCurrentScore } = props;
+    const { targets } = props;
+    const { setTargets} = props;
 
     const letterMap = useMemo(() => {
         const letterGeoArr = [];
@@ -66,13 +54,11 @@ export function Targets(props){
       }, [targets]);
 
     useFrame(() => {
+      let lastHit;
         targets.forEach((target, i) => {
           const v = planePosition.clone().sub(target.center);
           const dist = target.direction.dot(v);
-          const projected = planePosition
-            .clone()
-            .sub(target.direction.clone().multiplyScalar(dist));
-    
+          const projected = planePosition.clone()
           const hitDist = projected.distanceTo(target.center);
           if (hitDist < TARGET_RAD) {
             target.hit = true;
@@ -81,13 +67,42 @@ export function Targets(props){
         const atLeastOneHit = targets.find((target) => target.hit);
         if (atLeastOneHit) {
           setTargets(targets.filter((target) => {
-                if(target.hit){
-                    console.log(target.id)
+            if(target.hit){
+              if(target.id !== lastHit){
+                lastHit = target.id
+                console.log('handle guess invoked')
+                    setNewGuess(target.id)
+                    handleGuess(target.id)
+                  }
                 }
                 return !target.hit
             }));
         }
       });
+
+      
+      
+      const handleGuess = (guess) => {
+        let score = 0
+        setGuessesArray([...guessesArray, guess])
+        let newGameBoard = [...gameBoardState]
+        for (let i=0;i<wordToGuess.length; i++){
+            if(guess === wordToGuess[i]){
+              score += 50
+              newGameBoard[i] = guess
+            }
+          }
+        
+        if (compareArrays(newGameBoard, gameBoardState) === true){
+          setNewGuess('')
+          setLives(lives -1)
+        }
+        if (compareArrays(newGameBoard, gameBoardState) === false){
+          setNewGuess('')
+          setCurrentScore(currentScore + score)
+          setGameBoardState(newGameBoard)
+        }
+      }
       
       return (
           <group>{letterMap.map((letterMesh)=>{

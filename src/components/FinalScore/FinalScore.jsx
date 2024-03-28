@@ -7,7 +7,7 @@ function FinalScore({ score, isNewHighScore, leaderboardPosition }) {
     leaderboardPosition = 1
 
     const handleFlyAgainClick = () => {
-        // Logic to start the game again
+        navigate('/game')
     };
 
     const handleLeaderboardClick = () => {
