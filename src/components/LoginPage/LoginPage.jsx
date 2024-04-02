@@ -5,7 +5,7 @@ import { useUser } from "../../Contexts/UserContext/userContext";
 import { doSignOut } from "../firebase/auth";
 import "./LoginPage.css";
 import LoginButton from "./LoginButton/LoginButton";
-import SignupForm from "./SignupForm/SignupForm"
+import SignupForm from "./SignUpForm/SignupForm";
 import LoginForm from "./LoginForm/LoginForm";
 
 function SignUpPage({ isCreatingAccount, setIsCreatingAccount }) {

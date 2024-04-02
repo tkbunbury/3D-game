@@ -24,7 +24,7 @@ function Leaderboard() {
 		// We need to add Logic to logout the user and clear user data from local storage)
 		navigate("/");
 	};
-
+  
 	return (
 		<div className="leaderboard">
 			<h1 className="leaderboard-title">Leaderboard</h1>

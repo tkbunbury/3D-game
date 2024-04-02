@@ -5,6 +5,8 @@ import { doSignOut } from "../firebase/auth";
 import './StartScreen.css';
 
 function StartScreen({ isCreatingAccount }) {
+    const { user } = useUser()
+
     const navigate = useNavigate();
     const { currentUser, setUserLoggedIn, userLoggedIn } = useAuth();
 	const { user, users, setUser, setUsers, setCurrentScore } = useUser();
