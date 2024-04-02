@@ -6,7 +6,7 @@ import { Vector3 } from 'three';
 import SphereEnv from './SphereEnv';
 import Airplane from './Airplane';
 import { Targets } from "./Targets";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { getRandomWord } from "../../utils/random-word-api"
 import { resetLetters } from "../../utils/reset-letters";
 import everyWord from "../../utils/random-word-array";
@@ -25,11 +25,11 @@ function GameIndex() {
   const { currentScore, setCurrentScore } = useUser()
 
   const [planePosition, setPlanePosition] = useState(new Vector3(0, 3, 7));
-  
+  const [outOfBounds, setOutOfBounds] = useState(false)
   const [targets, setTargets] = useState([])
-
-  const [gameCount, setGameCount] = useState(1)
-  
+  const [previousWordHidden, setPreviousWordHidden] = useState('0')
+  const [gameCount, setGameCount] = useState(0)
+  const [previousWord, setPreviousWord] = useState()
   const [wordToGuess, setWordToGuess] = useState('')
   const [gameBoardState, setGameBoardState] = useState([])
   const [newGuess, setNewGuess] = useState('');
@@ -42,6 +42,8 @@ function GameIndex() {
   const [winLimiter, setWinLimiter] = useState(0)
 
   useEffect(() => {
+    setPreviousWord(wordToGuess)
+    
     setGameStarted(false)
     setIsError(false)
     setGivenError({})
@@ -64,6 +66,13 @@ function GameIndex() {
       xyzArr[2].set( 0, 0, 1);
       setWinLimiter(0)
       setGameStarted(true)
+      if(gameCount > 0){
+        console.log(previousWord)
+        setPreviousWordHidden('1')
+        setTimeout(()=>{setPreviousWordHidden('0')}, 2500)
+        
+      }
+      setGameCount(gameCount + 1)
     }).catch((err) => {
       setGivenError(err)
       setIsError(true)
@@ -89,6 +98,7 @@ let lettersGuessed = 0
 if ((lettersGuessed === gameBoardState.length) && wordToGuess !== '' && winLimiter === 0){
   console.log('game won - resetting')
   setWinLimiter((curr) => curr + 1)
+  setCurrentScore(currentScore + 200)
   setToggleReset((curr) => !curr)}
 
 if (isError){
@@ -116,6 +126,15 @@ if (isError){
           <h1>{gameBoardState}</h1>
         </div>
       </div>
+      <div id="overlay-mid">
+        {outOfBounds && <div className={'blink-me'} >
+          <h1> !! TURN BACK !! </h1>
+        </div>}
+        <div className={'guessed-correctly'} style={{opacity: previousWordHidden}}>
+          <h1>Word Guessed: {previousWord}</h1>
+          <h1>+200</h1>
+        </div>
+      </div>
       <div id="overlay-bot">
           <h1>Score: {currentScore}</h1>
           <h1>Lives: {lives}</h1>
@@ -134,7 +153,7 @@ if (isError){
             <meshStandardMaterial color="red" metalness={1} roughness={0}/>
           </Text3D>
           <Targets targets={targets} setTargets={setTargets} currentScore={currentScore} setCurrentScore={setCurrentScore} planePosition={planePosition} newGuess={newGuess} setNewGuess={setNewGuess} guessesArray={guessesArray} setGuessesArray={setGuessesArray} gameBoardState={gameBoardState} setGameBoardState={setGameBoardState} wordToGuess={wordToGuess} lives={lives} setLives={setLives}/>
-          <Airplane planePosition={planePosition} xyzArr={xyzArr} />
+          <Airplane planePosition={planePosition} xyzArr={xyzArr} outOfBounds={outOfBounds} setOutOfBounds ={setOutOfBounds}/>
       </Canvas>
       </Suspense>
       <Loader />

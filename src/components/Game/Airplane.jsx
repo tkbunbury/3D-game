@@ -8,7 +8,7 @@ import { updatePlaneAxis } from './controls';
 const delayedRotMatrix = new Matrix4();
 const delayedQuaternion = new Quaternion();
 
-function Airplane({ planePosition, xyzArr }) {
+function Airplane({ planePosition, xyzArr, outOfBounds, setOutOfBounds }) {
     
     const x = xyzArr[0];
     const y = xyzArr[1];
@@ -17,6 +17,12 @@ function Airplane({ planePosition, xyzArr }) {
     const airplaneRef = useRef();
 
     useFrame(({ camera }) => {
+        if(Math.abs(planePosition.x) > 15 || Math.abs(planePosition.y) > 15 || Math.abs(planePosition.z) > 15){
+            setOutOfBounds(true)
+        } else if(outOfBounds === true){
+            setOutOfBounds(false)
+        }
+
         updatePlaneAxis(x, y, z, planePosition, camera)
         const rotMatrix = new Matrix4().makeBasis(x, y, z)
         
