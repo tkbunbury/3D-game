@@ -99,7 +99,8 @@ if ((lettersGuessed === gameBoardState.length) && wordToGuess !== '' && winLimit
   console.log('game won - resetting')
   setWinLimiter((curr) => curr + 1)
   setCurrentScore(currentScore + 200)
-  setToggleReset((curr) => !curr)}
+  setToggleReset((curr) => !curr)
+}
 
 if (isError){
   return ( 
@@ -118,7 +119,6 @@ if (isError){
   return (
     <>
     <div className="game">
-    
     {gameStarted ? 
       <div id="overlay-container">
       <div id="overlay-top">
@@ -142,7 +142,7 @@ if (isError){
       </div>
     </div>
     : 
-    <></>
+    <><p id="give-it-a-second-message">give it a second...</p></>
     }
       <Suspense fallback={null}>
       <Canvas shadows>
@@ -161,5 +161,6 @@ if (isError){
     </>
   );
 }
+
 
 export default GameIndex;
