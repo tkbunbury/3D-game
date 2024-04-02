@@ -16,6 +16,12 @@
     border: 5px solid #007bff;
 }
 
+.bold {
+    font-weight: bold;
+    background: blue;
+    font-size: 110%;
+}
+
 .leaderboard-table th,
 .leaderboard-table td {
     padding: 10px;

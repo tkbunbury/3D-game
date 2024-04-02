@@ -1,7 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom';
+import { useUser } from '../../Contexts/UserContext/userContext';
 import './StartScreen.css';
 
 function StartScreen({ isCreatingAccount }) {
+    const { user } = useUser()
+
     const navigate = useNavigate();
     const { username } = useParams();
 
