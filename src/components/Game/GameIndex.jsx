@@ -11,6 +11,10 @@ import { getRandomWord } from "../../utils/random-word-api"
 import { resetLetters } from "../../utils/reset-letters";
 import everyWord from "../../utils/random-word-array";
 import './GameIndex.css'
+const x = new Vector3(1, 0, 0);
+const y = new Vector3(0, 1, 0);
+const z = new Vector3(0, 0, 1);
+const xyzArr = [x,y,z]
 
 function GameIndex() {
 
@@ -55,6 +59,9 @@ function GameIndex() {
       setGuessesArray([])
       setTargets(resetLetters())
       setPlanePosition(new Vector3(0, 3, 7))
+      xyzArr[0].set( 1, 0, 0);
+      xyzArr[1].set( 0, 1, 0);
+      xyzArr[2].set( 0, 0, 1);
       setWinLimiter(0)
       setGameStarted(true)
     }).catch((err) => {
@@ -127,7 +134,7 @@ if (isError){
             <meshStandardMaterial color="red" metalness={1} roughness={0}/>
           </Text3D>
           <Targets targets={targets} setTargets={setTargets} currentScore={currentScore} setCurrentScore={setCurrentScore} planePosition={planePosition} newGuess={newGuess} setNewGuess={setNewGuess} guessesArray={guessesArray} setGuessesArray={setGuessesArray} gameBoardState={gameBoardState} setGameBoardState={setGameBoardState} wordToGuess={wordToGuess} lives={lives} setLives={setLives}/>
-          <Airplane planePosition={planePosition} />
+          <Airplane planePosition={planePosition} xyzArr={xyzArr} />
       </Canvas>
       </Suspense>
       <Loader />

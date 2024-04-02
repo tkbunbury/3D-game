@@ -4,15 +4,15 @@ import { useFrame } from '@react-three/fiber';
 import { Matrix4, Quaternion, Vector3 } from 'three';
 import { updatePlaneAxis } from './controls';
 
-const x = new Vector3(1, 0, 0);
-const y = new Vector3(0, 1, 0);
-const z = new Vector3(0, 0, 1);
 
 const delayedRotMatrix = new Matrix4();
 const delayedQuaternion = new Quaternion();
 
-function Airplane({ planePosition }) {
-
+function Airplane({ planePosition, xyzArr }) {
+    
+    const x = xyzArr[0];
+    const y = xyzArr[1];
+    const z = xyzArr[2];
     const { scene } = useGLTF('/jet_gltf/scene.gltf');
     const airplaneRef = useRef();
 
