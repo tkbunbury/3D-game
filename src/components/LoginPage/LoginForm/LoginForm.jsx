@@ -4,7 +4,7 @@ import { useAuth } from "../../../Contexts/AuthContext/authContext";
 import { useUser } from "../../../Contexts/UserContext/userContext";
 import { doSignInWithEmailAndPassword } from "../../firebase/auth";
 
-function LoginForm({ onSubmit }) {
+function LoginForm() {
   const { userLoggedIn } = useAuth();
   const { user } = useUser();
   const [email, setEmail] = useState("");

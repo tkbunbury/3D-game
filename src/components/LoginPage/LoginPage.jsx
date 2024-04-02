@@ -5,18 +5,17 @@ import { useUser } from "../../Contexts/UserContext/userContext";
 import { doSignOut } from "../firebase/auth";
 import "./LoginPage.css";
 import LoginButton from "./LoginButton/LoginButton";
-import SignupForm from "./SignUpForm/SignupForm";
+import SignupForm from "./SignupForm/SignupForm";
 import LoginForm from "./LoginForm/LoginForm";
 
-function SignUpPage({ isCreatingAccount, setIsCreatingAccount }) {
+function SignUpPage() {
 	const { currentUser, setUserLoggedIn, userLoggedIn } = useAuth();
 	const { user, users, setUser, setUsers } = useUser();
+	const [isCreatingAccount, setIsCreatingAccount] = useState(false);
 
 	const [showSignupForm, setShowSignupForm] = useState(false);
 	const [showLoginForm, setShowLoginForm] = useState(false);
 
-	const [username, setUsername] = useState("");
-	const [password, setPassword] = useState("");
 	const navigate = useNavigate();
 
 	const handleNewUserClick = () => {
@@ -31,7 +30,7 @@ function SignUpPage({ isCreatingAccount, setIsCreatingAccount }) {
 		setIsCreatingAccount(false);
 	};
 
-	const handleGuestClick = () => {
+	const handlePlayClick = () => {
 		navigate("/startscreen");
 	};
 
@@ -53,7 +52,7 @@ function SignUpPage({ isCreatingAccount, setIsCreatingAccount }) {
 					label={userLoggedIn ? "Sign Out" : "Sign In"}
 					onClick={userLoggedIn ? handleSignOutClick : handleLoginClick}
 				/>
-				<LoginButton label="Play!" onClick={handleGuestClick} />
+				<LoginButton label="Play!" onClick={handlePlayClick} />
 			</div>
 				{showSignupForm && <SignupForm/>}
 				{showLoginForm && <LoginForm/>}

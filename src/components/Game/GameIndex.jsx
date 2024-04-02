@@ -27,8 +27,6 @@ function GameIndex() {
   const [planePosition, setPlanePosition] = useState(new Vector3(0, 3, 7));
   
   const [targets, setTargets] = useState([])
-
-  const [gameCount, setGameCount] = useState(1)
   
   const [wordToGuess, setWordToGuess] = useState('')
   const [gameBoardState, setGameBoardState] = useState([])
@@ -87,9 +85,11 @@ let lettersGuessed = 0
   })
 
 if ((lettersGuessed === gameBoardState.length) && wordToGuess !== '' && winLimiter === 0){
-  console.log('game won - resetting')
   setWinLimiter((curr) => curr + 1)
-  setToggleReset((curr) => !curr)}
+  console.log('game won - resetting')
+  setToggleReset((curr) => !curr)
+}
+  
 
 if (isError){
   return ( 
@@ -108,7 +108,6 @@ if (isError){
   return (
     <>
     <div className="game">
-    
     {gameStarted ? 
       <div id="overlay-container">
       <div id="overlay-top">
@@ -123,7 +122,7 @@ if (isError){
       </div>
     </div>
     : 
-    <></>
+    <><p id="give-it-a-second-message">give it a second...</p></>
     }
       <Suspense fallback={null}>
       <Canvas shadows>
@@ -142,5 +141,6 @@ if (isError){
     </>
   );
 }
+
 
 export default GameIndex;

@@ -1,5 +1,4 @@
 import { Routes, Route, Link, UNSAFE_useRouteId } from "react-router-dom";
-import { useState } from "react";
 import LoginPage from "./components/LoginPage/LoginPage";
 import Leaderboard from "./components/Leaderboard/Leaderboard";
 import StartScreen from "./components/StartScreen/StartScreen";
@@ -9,8 +8,7 @@ import { useUser } from "./Contexts/UserContext/userContext";
 
 function App() {
   const { user } = useUser()
-  const [isCreatingAccount, setIsCreatingAccount] = useState(false);
-
+  
   return (
     <div className="container">
       <Link to="/">
@@ -20,20 +18,14 @@ function App() {
         <Route
           path="/"
           element={
-            <LoginPage
-              setIsCreatingAccount={setIsCreatingAccount}
-              isCreatingAccount={isCreatingAccount}
-            />
+            <LoginPage/>
           }
         />
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route
           path="/startscreen"
           element={
-            <StartScreen
-              setIsCreatingAccount={setIsCreatingAccount}
-              isCreatingAccount={isCreatingAccount}
-            />
+            <StartScreen/>
           }
         />
         <Route path="/finalscore" element={<FinalScore />} />
