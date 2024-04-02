@@ -21,8 +21,8 @@ function SignupForm({ onSubmit }) {
         if (password !== confirmPassword) {
             setError('Passwords do not match. Please retype.');
             return;
-        }
-        createUserWithEmailAndPassword(auth, email, password);
+        }  
+    createUserWithEmailAndPassword(auth, email, password);
 		const userRef = await doc(db, "scores", email);
 		setDoc(userRef, {
 			highscore: 0,
@@ -31,9 +31,6 @@ function SignupForm({ onSubmit }) {
 		});
         
     };
-
-    console.log(userLoggedIn)
-    
 
     return (
     <form className="login-form" onSubmit={handleSubmit}>
