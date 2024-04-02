@@ -1,12 +1,16 @@
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../Contexts/UserContext/userContext';
 import './FinalScore.css';
 
 function FinalScore({ score, isNewHighScore, leaderboardPosition }) {
+    const { currentScore, user, setCurrentScore } = useUser()
+    console.log(user)
     const navigate = useNavigate();
-    score = 99999
+    score = currentScore
     leaderboardPosition = 1
 
     const handleFlyAgainClick = () => {
+        setCurrentScore(0)
         navigate('/game')
     };
 

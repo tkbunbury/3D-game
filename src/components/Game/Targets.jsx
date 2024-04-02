@@ -1,4 +1,5 @@
 import { Text3D } from "@react-three/drei";
+import { useUser } from "../../Contexts/UserContext/userContext";
 import { extend } from '@react-three/fiber'
 import { useFrame } from "@react-three/fiber";
 import { useMemo } from "react";
@@ -10,21 +11,10 @@ extend({ TextGeometry })
 const TARGET_RAD = 0.09;
 
 export function Targets(props){
-    const { planePosition } = props;
-    const { newGuess } = props;
-    const { setNewGuess } = props;
-    const { guessesArray } = props;
-    const { setGuessesArray } = props;
-    const { gameBoardState } = props;
-    const { setGameBoardState } = props;
-    const { wordToGuess } = props;
-    const { lives } = props;
-    const { setLives } = props;
-    const { currentScore } = props;
-    const { setCurrentScore } = props;
-    const { targets } = props;
-    const { setTargets} = props;
-
+    const { planePosition, newGuess, setNewGuess, guessesArray, setGuessesArray, gameBoardState, setGameBoardState, wordToGuess, lives, setLives, targets, setTargets } = props;
+    const { currentScore } = useUser()
+    const { setCurrentScore } = useUser()
+  
     const letterMap = useMemo(() => {
         const letterGeoArr = [];
     
@@ -70,7 +60,6 @@ export function Targets(props){
             if(target.hit){
               if(target.id !== lastHit){
                 lastHit = target.id
-                console.log('handle guess invoked')
                     setNewGuess(target.id)
                     handleGuess(target.id)
                   }
@@ -80,8 +69,6 @@ export function Targets(props){
         }
       });
 
-      
-      
       const handleGuess = (guess) => {
         let score = 0
         setGuessesArray([...guessesArray, guess])
@@ -108,5 +95,5 @@ export function Targets(props){
           <group>{letterMap.map((letterMesh)=>{
             return letterMesh
           })}</group>
-    );
+  );
 };

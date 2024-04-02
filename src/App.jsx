@@ -28,7 +28,7 @@ function App() {
         />
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route
-          path="/startscreen/:username"
+          path="/startscreen"
           element={
             <StartScreen
               setIsCreatingAccount={setIsCreatingAccount}

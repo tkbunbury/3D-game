@@ -5,7 +5,7 @@ const randomWordApi = axios.create({
 })
 
 export const getRandomWord = () => {
-    return randomWordApi.get('/word').then((res) => {
-        return res.data[0]
+    return randomWordApi.get('/all').then((res) => {
+        return res.data[Math.floor((Math.random())*(res.data.length))]
     })
 }

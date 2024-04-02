@@ -35,6 +35,7 @@
 }
 
 .leaderboard-button,
+.back-to-login-button,
 .logout-button {
     padding: 15px 30px;
     font-size: 18px;
@@ -47,6 +48,7 @@
 }
 
 .leaderboard-button:hover,
+.back-to-login-button:hover,
 .logout-button:hover {
     background-color: #27ae60;
 }

@@ -32,25 +32,11 @@ function SignUpPage({ isCreatingAccount, setIsCreatingAccount }) {
 	};
 
 	const handleGuestClick = () => {
-		navigate("/startscreen/Guest");
+		navigate("/startscreen");
 	};
 
 	const handleLeaderboardClick = () => {
 		navigate("/leaderboard");
-	};
-
-	const handleNewUserSubmit = (username, password) => {
-		console.log("Form submitted. Username:", username, "Password:", password);
-		console.log("Creating new user:", username, password);
-		setUsername(username);
-		navigate(`/startscreen/${username}`);
-	};
-
-	const handleLoginSubmit = (username, password) => {
-		console.log("Form submitted. Username:", username, "Password:", password);
-		console.log("Logging in:", username, password);
-		setUsername(username);
-		navigate(`/startscreen/${username}`);
 	};
 
 	const handleSignOutClick = () => {
@@ -67,13 +53,11 @@ function SignUpPage({ isCreatingAccount, setIsCreatingAccount }) {
 					label={userLoggedIn ? "Sign Out" : "Sign In"}
 					onClick={userLoggedIn ? handleSignOutClick : handleLoginClick}
 				/>
-				<LoginButton label="Play as Guest" onClick={handleGuestClick} />
+				<LoginButton label="Play!" onClick={handleGuestClick} />
 			</div>
-			{showSignupForm && <SignupForm onSubmit={handleNewUserSubmit} />}
-			{showLoginForm && <LoginForm onSubmit={handleLoginSubmit} />}
-			<button className="leaderboard-button" onClick={handleLeaderboardClick}>
-				Go to Leaderboard
-			</button>
+				{showSignupForm && <SignupForm/>}
+				{showLoginForm && <LoginForm/>}
+			<button className="leaderboard-button" onClick={handleLeaderboardClick}>Leaderboard</button>
 		</div>
 	);
 }

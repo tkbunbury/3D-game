@@ -14,6 +14,7 @@ export function UserProvider({ children }) {
 	const [user, setUser] = useState({});
 	const [users, setUsers] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
+	const [currentScore, setCurrentScore] = useState(0)
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -43,6 +44,8 @@ export function UserProvider({ children }) {
 		setUser,
 		setUsers,
 		isLoading,
+		currentScore,
+		setCurrentScore,
 	};
 	return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }

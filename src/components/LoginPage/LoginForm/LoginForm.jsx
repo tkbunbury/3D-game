@@ -29,7 +29,7 @@ function LoginForm({ onSubmit }) {
     }
   };
 
-  return userLoggedIn ? <p>You are  now logged in as {user.username}</p> :  (
+  return userLoggedIn ? <p>Sign in successful, hello {user.username}!</p> :  (
     <>
       <form className="login-form" onSubmit={handleSubmit}>
 		{errorSigningIn && <p>Please can you check your email and password and try again</p>}
