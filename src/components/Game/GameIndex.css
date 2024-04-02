@@ -22,7 +22,7 @@
   justify-content: space-between;
   align-items:center;
 }
-#overlay-bot, #overlay-top{
+#overlay-bot, #overlay-mid, #overlay-top{
   position: fixed;
   display:flex;
   align-content: center;
@@ -34,7 +34,31 @@
   top:8%;
   justify-content: center;
 }
+
+#overlay-mid{
+  top:40%;
+  justify-content: center;
+  flex-direction: column;
+}
+
 #overlay-bot{
   justify-content: space-between;
   bottom:12%;
+}
+
+.guessed-correctly {
+  color:rgb(3, 173, 3);
+
+  transition: visibility 0s 2s, opacity 2s linear;
+}
+
+.blink-me {
+  color: red;
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
 }
