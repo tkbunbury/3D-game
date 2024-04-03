@@ -14,9 +14,10 @@ function App() {
   const [allWords, setAllWords] = useState([])
   const [soundOn, setSoundOn] = useState(true)
   const [gameEnvironment, setGameEnvironment] = useState('Heaven')
+  const [motionBlur, setMotionBlur] = useState(false)
   
   return (
-    <GameStatsContext.Provider value={{finalWord, setFinalWord, allWords, setAllWords, gameEnvironment, setGameEnvironment, soundOn, setSoundOn }}>
+    <GameStatsContext.Provider value={{finalWord, setFinalWord, allWords, setAllWords, gameEnvironment, setGameEnvironment, soundOn, setSoundOn, motionBlur, setMotionBlur }}>
     <div className="container">
       <Link to="/">
         <h1 className="game-title">Hangman Heaven {user.username && " - " + user.username}</h1>

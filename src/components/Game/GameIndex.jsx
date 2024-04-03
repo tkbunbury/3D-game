@@ -11,9 +11,12 @@ import { Targets } from "./Targets";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { getRandomWord } from "../../utils/random-word-api"
 import { resetLetters } from "../../utils/reset-letters";
+import { BlendFunction } from "postprocessing"
 import everyWord from "../../utils/random-word-array";
 import GameStatsContext from "../../Contexts/GameStatsContext/GameStatsContext";
 import './GameIndex.css'
+import { EffectComposer, HueSaturation } from "@react-three/postprocessing";
+import { MotionBlur } from "./MotionBlur";
 const x = new Vector3(1, 0, 0);
 const y = new Vector3(0, 1, 0);
 const z = new Vector3(0, 0, 1);
@@ -43,7 +46,7 @@ function GameIndex() {
   const [isError, setIsError]  = useState(false)
   const [givenError, setGivenError] = useState({})
   const [winLimiter, setWinLimiter] = useState(0)
-  const {finalWord, setFinalWord, allWords, setAllWords, gameEnvironment, setGameEnvironment, soundOn, setSoundOn} = useContext(GameStatsContext)
+  const {finalWord, setFinalWord, allWords, setAllWords, gameEnvironment, setGameEnvironment, soundOn, setSoundOn, motionBlur, setMotionBlur} = useContext(GameStatsContext)
   const [playSound] = useSound(hornSFX, {interrupt: false, playbackRate: 1, soundEnabled: soundOn})
 
   useEffect(() => {
@@ -120,9 +123,6 @@ if (isError){
   </>
   )
 }
-
-
-
   return (
     <>
     <div className="game">
@@ -161,6 +161,14 @@ if (isError){
           </Text3D>
           <Targets targets={targets} setTargets={setTargets} currentScore={currentScore} setCurrentScore={setCurrentScore} planePosition={planePosition} newGuess={newGuess} setNewGuess={setNewGuess} guessesArray={guessesArray} setGuessesArray={setGuessesArray} gameBoardState={gameBoardState} setGameBoardState={setGameBoardState} wordToGuess={wordToGuess} lives={lives} setLives={setLives}/>
           <Airplane planePosition={planePosition} xyzArr={xyzArr} outOfBounds={outOfBounds} setOutOfBounds ={setOutOfBounds}/>
+          {motionBlur &&<EffectComposer>
+             <MotionBlur />
+            <HueSaturation
+              blendFunction={BlendFunction.NORMAL}
+              hue={-0.15}
+              saturation={0.1}
+            />
+          </EffectComposer>}
       </Canvas>
       </Suspense>
       <Loader />
