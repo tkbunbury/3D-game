@@ -22,25 +22,29 @@ function LoginPage() {
 
   useEffect(() => {
     async function fetchData() {
-		setTopThreePlayersData([
-		  { rank: 1, username: users[0].username, highscore: users[0].highscore },
-		  { rank: 2, username: users[1].username, highscore: users[1].highscore },
-		  { rank: 3, username: users[2].username, highscore: users[2].highscore },
-		]);
-      if (!isLoading && user.username) {
+      if (users && users.length > 0) {
+        setTopThreePlayersData([
+          { rank: 1, username: users[0].username, highscore: users[0].highscore },
+          { rank: 2, username: users[1].username, highscore: users[1].highscore },
+          { rank: 3, username: users[2].username, highscore: users[2].highscore },
+        ]);
+      }
+      
+      if (!isLoading && user && user.username) {
         const tempUserPosition = users.findIndex((person) => person.username === user.username) + 1;
         setPlayersPosition(tempUserPosition);
-        if (user.username) {
+        
+        if (user.username && users.length >= tempUserPosition) {
           setContendersData([
-            { rank: playersPosition - 1, username: users[playersPosition - 2].username, highscore: users[playersPosition - 2].highscore },
-            { rank: playersPosition, username: users[playersPosition - 1].username, highscore: users[playersPosition - 1].highscore },
-            { rank: playersPosition + 1, username: users[playersPosition].username, highscore: users[playersPosition].highscore },
+            { rank: tempUserPosition - 1, username: users[tempUserPosition - 2].username, highscore: users[tempUserPosition - 2].highscore },
+            { rank: tempUserPosition, username: users[tempUserPosition - 1].username, highscore: users[tempUserPosition - 1].highscore },
+            { rank: tempUserPosition + 1, username: users[tempUserPosition].username, highscore: users[tempUserPosition].highscore },
           ]);
         }
       }
     }
     fetchData();
-  }, [users, user, isLoading, playersPosition]);
+  }, [users, user, isLoading]);
 
 	const handlePlayClick = () => {
 		navigate("/startscreen");
@@ -54,7 +58,6 @@ function LoginPage() {
   const handleLoginClick = () => {
     setShowSignupForm(false);
     setShowLoginForm(true);
-    setIsCreatingAccount(false);
   };
 
   const handleGuestClick = () => {
