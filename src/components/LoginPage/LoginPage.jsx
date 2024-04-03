@@ -5,7 +5,7 @@ import { useUser } from "../../Contexts/UserContext/userContext";
 import { doSignOut } from "../firebase/auth";
 import "./LoginPage.css";
 import LoginButton from "./LoginButton/LoginButton";
-import SignupForm from "./SignupForm/SignupForm";
+import SignupForm from "./SignUpForm/SignupForm";
 import LoginForm from "./LoginForm/LoginForm";
 
 function LoginPage() {
@@ -33,13 +33,19 @@ function LoginPage() {
       if (!isLoading && user && user.username) {
         const tempUserPosition = users.findIndex((person) => person.username === user.username) + 1;
         setPlayersPosition(tempUserPosition);
-        
         if (user.username && users.length >= tempUserPosition) {
-          setContendersData([
+          if(tempUserPosition === 1){
+			setContendersData([
+				{ rank: tempUserPosition, username: users[tempUserPosition - 1].username, highscore: users[tempUserPosition - 1].highscore },
+				{ rank: tempUserPosition + 1, username: users[tempUserPosition].username, highscore: users[tempUserPosition].highscore },
+				{ rank: tempUserPosition + 2, username: users[tempUserPosition +1].username, highscore: users[tempUserPosition +1].highscore },
+			  ]);
+		  }
+			else {setContendersData([
             { rank: tempUserPosition - 1, username: users[tempUserPosition - 2].username, highscore: users[tempUserPosition - 2].highscore },
             { rank: tempUserPosition, username: users[tempUserPosition - 1].username, highscore: users[tempUserPosition - 1].highscore },
             { rank: tempUserPosition + 1, username: users[tempUserPosition].username, highscore: users[tempUserPosition].highscore },
-          ]);
+          ])};
         }
       }
     }
