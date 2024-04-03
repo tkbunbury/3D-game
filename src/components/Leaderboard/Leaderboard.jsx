@@ -3,10 +3,15 @@ import "./Leaderboard.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Contexts/AuthContext/authContext";
 import { useUser } from "../../Contexts/UserContext/userContext";
+import { useEffect } from "react";
 
 function Leaderboard() {
 	const { currentUser } = useAuth();
 	const { user, users, isLoading } = useUser();
+
+	useEffect(() => {
+
+	},[])
 
 	const leaderboardData = [
 		{ rank: 1, username: users[0].username, highscore: users[0].highscore },

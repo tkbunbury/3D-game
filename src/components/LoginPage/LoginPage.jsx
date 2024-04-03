@@ -5,10 +5,10 @@ import { useUser } from "../../Contexts/UserContext/userContext";
 import { doSignOut } from "../firebase/auth";
 import "./LoginPage.css";
 import LoginButton from "./LoginButton/LoginButton";
-import SignupForm from "./SignupForm/SignupForm";
+import SignupForm from "./SignUpForm/SignupForm";
 import LoginForm from "./LoginForm/LoginForm";
 
-function LoginPage({ isCreatingAccount, setIsCreatingAccount }) {
+function LoginPage() {
   const { setUserLoggedIn, userLoggedIn } = useAuth();
   const { user, users, setUser, isLoading } = useUser();
   
@@ -18,18 +18,18 @@ function LoginPage({ isCreatingAccount, setIsCreatingAccount }) {
   const [playersPosition, setPlayersPosition] = useState();
   const [contendersData, setContendersData] = useState([]);
 
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
+		setTopThreePlayersData([
+		  { rank: 1, username: users[0].username, highscore: users[0].highscore },
+		  { rank: 2, username: users[1].username, highscore: users[1].highscore },
+		  { rank: 3, username: users[2].username, highscore: users[2].highscore },
+		]);
       if (!isLoading && user.username) {
         const tempUserPosition = users.findIndex((person) => person.username === user.username) + 1;
         setPlayersPosition(tempUserPosition);
-        setTopThreePlayersData([
-          { rank: 1, username: users[0].username, highscore: users[0].highscore },
-          { rank: 2, username: users[1].username, highscore: users[1].highscore },
-          { rank: 3, username: users[2].username, highscore: users[2].highscore },
-        ]);
         if (user.username) {
           setContendersData([
             { rank: playersPosition - 1, username: users[playersPosition - 2].username, highscore: users[playersPosition - 2].highscore },
@@ -49,7 +49,6 @@ function LoginPage({ isCreatingAccount, setIsCreatingAccount }) {
   const handleNewUserClick = () => {
     setShowSignupForm(true);
     setShowLoginForm(false);
-    setIsCreatingAccount(true);
   };
 
   const handleLoginClick = () => {
@@ -69,50 +68,6 @@ function LoginPage({ isCreatingAccount, setIsCreatingAccount }) {
   const handleSignOutClick = () => {
     doSignOut(setUser, setUserLoggedIn);
   };
-
-  const renderLeaderboard = () => (
-    <div>
-      <h2>Top 3 Scores</h2>
-      <table className="leaderboard-table">
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Username</th>
-            <th>Highscore</th>
-          </tr>
-        </thead>
-        <tbody>
-          {topThreePlayersData.map((entry, index) => (
-            <tr key={index} className={user.username === entry.username ? "bold" : null}>
-              <td>{entry.rank}</td>
-              <td>{entry.username}</td>
-              <td>{entry.highscore}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <h2 hidden={!userLoggedIn}>Your Contenders</h2>
-      <table className="leaderboard-table">
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Username</th>
-            <th>Highscore</th>
-          </tr>
-        </thead>
-        <tbody>
-          {contendersData.map((entry, index) => (
-            <tr key={index} className={user.username === entry.username ? "bold" : ""}>
-              <td>{entry.rank}</td>
-              <td>{entry.username}</td>
-              <td>{entry.highscore}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <button className="leaderboard-button" onClick={handleLeaderboardClick}>Leaderboard</button>
-    </div>
-  );
 
   	return isLoading ? <p>Loading...</p> : user.username ? (
 		<div className="login-page">
@@ -199,7 +154,6 @@ function LoginPage({ isCreatingAccount, setIsCreatingAccount }) {
 				</tbody>
 			</table>
 			<button className="leaderboard-button" onClick={handleLeaderboardClick}>Leaderboard</button>
-			
 		</div>
 	)
 }
