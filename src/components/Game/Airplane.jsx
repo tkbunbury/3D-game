@@ -62,8 +62,10 @@ function Airplane({ planePosition, xyzArr, outOfBounds, setOutOfBounds }) {
     });
 
     return (
+
         <primitive object={scene} ref={airplaneRef} position={planePosition} scale={[0.007, 0.007, 0.007]} />
-    );
+    
+        );
 }
 
 export default Airplane;

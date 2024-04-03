@@ -1,7 +1,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../Contexts/UserContext/userContext";
-import { PerspectiveCamera, Environment, Text3D, Loader } from "@react-three/drei";
+import { PerspectiveCamera, Environment, Text3D, Loader, Sparkles } from "@react-three/drei";
 import { Vector3 } from 'three';
 import SphereEnv from './SphereEnv';
 import Airplane from './Airplane';
@@ -147,6 +147,15 @@ if (isError){
       <Suspense fallback={null}>
       <Canvas shadows>
           <SphereEnv/>
+          <Sparkles
+            color={'gold'}
+            size={5}
+            count={500}
+            noise={1}
+            opacity={1}
+            speed={0.3}
+            scale={[60, 50, 50]}
+          />
           <Environment background={false} files={'assets/textures/envmap.hdr'}/>
           <PerspectiveCamera makeDefault position={[0, 10, 10]}/>
           <Text3D position={[-4,0,0]} font={'fonts/Crash.json'}>Hangman Heaven

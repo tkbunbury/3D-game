@@ -1,4 +1,6 @@
 import { Text3D } from "@react-three/drei";
+import { useSound } from 'use-sound'
+import popSFX from '../../../public/sounds/pop-sound.wav'
 import { useUser } from "../../Contexts/UserContext/userContext";
 import { extend } from '@react-three/fiber'
 import { useFrame } from "@react-three/fiber";
@@ -14,6 +16,7 @@ export function Targets(props){
     const { planePosition, newGuess, setNewGuess, guessesArray, setGuessesArray, gameBoardState, setGameBoardState, wordToGuess, lives, setLives, targets, setTargets } = props;
     const { currentScore } = useUser()
     const { setCurrentScore } = useUser()
+    const [playSound] = useSound(popSFX, {interrupt: false, playbackRate: 1})
   
     const letterMap = useMemo(() => {
         const letterGeoArr = [];
@@ -24,7 +27,8 @@ export function Targets(props){
                   letterColor = 'red'
                 }
                 else {letterColor = '#FFA000'}
-                const textMesh = <Text3D
+                const textMesh = 
+                <Text3D
                 key = {target.id} 
                 size={.1} 
                 height={0.03} 
@@ -70,6 +74,7 @@ export function Targets(props){
       });
 
       const handleGuess = (guess) => {
+        playSound()
         let score = 0
         setGuessesArray([...guessesArray, guess])
         let newGameBoard = [...gameBoardState]
