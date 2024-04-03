@@ -8,7 +8,9 @@ import {
     DepthOfField,
     Bloom,
     Noise,
-    Vignette
+    Vignette,
+    HueSaturation,
+    Pixelation
   } from "@react-three/postprocessing";
 
 
@@ -107,6 +109,32 @@ function SphereEnv(){
           height={200}
           opacity={0.5}
         />
+      </EffectComposer>
+        </>
+        )
+    }
+    if (gameEnvironment === 'Playstation 1'){
+        const map = useTexture('assets/textures/vortexBackground.png');
+        return (
+        <>
+        <mesh>
+            <sphereGeometry args={[60, 50, 50]} />
+            <meshBasicMaterial
+                side={BackSide}
+                map={map}
+            />
+        </mesh>
+        <EffectComposer multisampling={0} disableNormalPass={true}>
+        <Pixelation
+        granularity={3}
+        />
+        <Bloom
+          luminanceThreshold={0}
+          luminanceSmoothing={2}
+          height={300}
+          opacity={2}
+        />
+        <Noise opacity={0.03} />
       </EffectComposer>
         </>
         )
