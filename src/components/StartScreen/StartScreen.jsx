@@ -3,16 +3,14 @@ import { useUser } from '../../Contexts/UserContext/userContext';
 import { useAuth } from "../../Contexts/AuthContext/authContext";
 import { doSignOut } from "../firebase/auth";
 import './StartScreen.css';
-import { useEffect } from 'react';
+import GameStatsContext from '../../Contexts/GameStatsContext/GameStatsContext';
+import { useContext } from 'react';
 
 function StartScreen() {
     const navigate = useNavigate();
     const { currentUser, setUserLoggedIn, userLoggedIn } = useAuth();
 	const { user, users, setUser, setUsers, setCurrentScore } = useUser();
-
-    useEffect(() => {
-        
-    }, [user])
+    const {setAllWords} = useContext(GameStatsContext)
 
     const handleLogout = () => {
         doSignOut(setUser, setUserLoggedIn);
@@ -29,6 +27,7 @@ function StartScreen() {
             <p>Use the arrow keys to change direction, shift for afterburners. If you get lost, use 'r' to reset.</p> 
             <p>Good Luck!</p>
             <button className="take-flight-button" onClick={() => {
+                setAllWords([])
                 setCurrentScore(0)
                 navigate('/game')}}>Take Flight</button>
             

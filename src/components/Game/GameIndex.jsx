@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, Suspense, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../Contexts/UserContext/userContext";
 import { PerspectiveCamera, Environment, Text3D, Loader, Sparkles } from "@react-three/drei";
@@ -10,6 +10,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { getRandomWord } from "../../utils/random-word-api"
 import { resetLetters } from "../../utils/reset-letters";
 import everyWord from "../../utils/random-word-array";
+import GameStatsContext from "../../Contexts/GameStatsContext/GameStatsContext";
 import './GameIndex.css'
 const x = new Vector3(1, 0, 0);
 const y = new Vector3(0, 1, 0);
@@ -40,6 +41,7 @@ function GameIndex() {
   const [isError, setIsError]  = useState(false)
   const [givenError, setGivenError] = useState({})
   const [winLimiter, setWinLimiter] = useState(0)
+  const {finalWord, setFinalWord, allWords, setAllWords} = useContext(GameStatsContext)
 
   useEffect(() => {
     setPreviousWord(wordToGuess)
@@ -53,6 +55,8 @@ function GameIndex() {
       return word
     })
     .then((word) => {
+      setFinalWord(word)
+      setAllWords([...allWords, word])
       let gameBoard = []
       for (let i=0;i<word.length;i++){
         gameBoard.push('_')
@@ -67,7 +71,6 @@ function GameIndex() {
       setWinLimiter(0)
       setGameStarted(true)
       if(gameCount > 0){
-        console.log(previousWord)
         setPreviousWordHidden('1')
         setTimeout(()=>{setPreviousWordHidden('0')}, 2500)
         
