@@ -1,6 +1,6 @@
 import { Text3D } from "@react-three/drei";
 import { useSound } from 'use-sound'
-import popSFX from '../../../public/sounds/pop-sound.wav'
+import popSFX from '../../sounds/pop-sound.wav'
 import { useUser } from "../../Contexts/UserContext/userContext";
 import { extend } from '@react-three/fiber'
 import { useFrame } from "@react-three/fiber";
@@ -33,7 +33,7 @@ export function Targets(props){
                 size={.1} 
                 height={0.03} 
                 position={[target.center.x-0.03, target.center.y-0.03, target.center.z]} 
-                font={'node_modules/three/examples/fonts/droid/droid_serif_regular.typeface.json'} 
+                font={'fonts/Droid Serif_Regular.json'} 
                 brevelSegments={.51}
                 bevelEnabled
                 bevelSize={0.008}
