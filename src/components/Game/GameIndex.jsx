@@ -41,7 +41,7 @@ function GameIndex() {
   const [isError, setIsError]  = useState(false)
   const [givenError, setGivenError] = useState({})
   const [winLimiter, setWinLimiter] = useState(0)
-  const {finalWord, setFinalWord, allWords, setAllWords} = useContext(GameStatsContext)
+  const {finalWord, setFinalWord, allWords, setAllWords, gameEnvironment, setGameEnvironment, soundOn, setSoundOn} = useContext(GameStatsContext)
 
   useEffect(() => {
     setPreviousWord(wordToGuess)
@@ -150,15 +150,6 @@ if (isError){
       <Suspense fallback={null}>
       <Canvas shadows>
           <SphereEnv/>
-          <Sparkles
-            color={'gold'}
-            size={5}
-            count={500}
-            noise={1}
-            opacity={1}
-            speed={0.3}
-            scale={[60, 50, 50]}
-          />
           <Environment background={false} files={'assets/textures/envmap.hdr'}/>
           <PerspectiveCamera makeDefault position={[0, 10, 10]}/>
           <Text3D position={[-4,0,0]} font={'fonts/Crash.json'}>Hangman Heaven
