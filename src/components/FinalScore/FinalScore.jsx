@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../Contexts/UserContext/userContext';
 import './FinalScore.css';
 import db from '../firebase/firebase';
 import { doc, setDoc } from '@firebase/firestore';
+import GameStatsContext from '../../Contexts/GameStatsContext/GameStatsContext';
 
 function FinalScore() {
     const navigate = useNavigate();
     const { user, users, currentScore, setCurrentScore } = useUser()
     const [isHighscore, setIsHighscore] = useState(false)
+    const {finalWord, allWords, setAllWords} = useContext(GameStatsContext)
 
 
     const newHighScore = (latestScore) => {
@@ -21,6 +23,7 @@ function FinalScore() {
     }
 
     const handleFlyAgainClick = () => {
+        setAllWords([])
         setCurrentScore(0)
         navigate('/game')
     };
@@ -65,6 +68,12 @@ function FinalScore() {
             <button className="fly-again-button" onClick={handleFlyAgainClick}>Fly Again</button>
             <button className="logout-button" onClick={handleHome}>Home</button>
             <button className="leaderboard-button" onClick={handleLeaderboardClick}>Leaderboards</button>
+            <div>
+                <p>The word was: {finalWord}</p>
+                {allWords.length>1 && <ul>Words:{allWords.map((word)=>{
+                    return <li>{word}</li>
+                })}</ul>}
+            </div>
         </div>
     );
 }

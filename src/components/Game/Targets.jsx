@@ -50,8 +50,6 @@ export function Targets(props){
     useFrame(() => {
       let lastHit;
         targets.forEach((target, i) => {
-          const v = planePosition.clone().sub(target.center);
-          const dist = target.direction.dot(v);
           const projected = planePosition.clone()
           const hitDist = projected.distanceTo(target.center);
           if (hitDist < TARGET_RAD) {

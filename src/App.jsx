@@ -5,11 +5,16 @@ import StartScreen from "./components/StartScreen/StartScreen";
 import FinalScore from "./components/FinalScore/FinalScore";
 import GameIndex from "./components/Game/GameIndex";
 import { useUser } from "./Contexts/UserContext/userContext";
+import GameStatsContext from "./Contexts/GameStatsContext/GameStatsContext";
+import { useState } from "react";
 
 function App() {
   const { user } = useUser()
+  const [finalWord, setFinalWord] = useState('')
+  const [allWords, setAllWords] = useState([])
   
   return (
+    <GameStatsContext.Provider value={{finalWord, setFinalWord, allWords, setAllWords}}>
     <div className="container">
       <Link to="/">
         <h1 className="game-title">Hangman Heaven {user.username && " - " + user.username}</h1>
@@ -32,6 +37,7 @@ function App() {
         <Route path="/game" element={<GameIndex />} />
       </Routes>
     </div>
+    </GameStatsContext.Provider>
   );
 }
 
