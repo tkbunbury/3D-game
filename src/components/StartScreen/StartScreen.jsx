@@ -13,9 +13,7 @@ function StartScreen() {
     const {setAllWords} = useContext(GameStatsContext)
 
     const handleLogout = () => {
-        doSignOut();
-		setUser({});
-		setUserLoggedIn(false);
+        doSignOut(setUser, setUserLoggedIn);
     };
 
     const handleBackToLogin = () => {
