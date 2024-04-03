@@ -36,6 +36,7 @@ function StartScreen() {
                 <button className="options-button" onClick={() => setGameEnvironment('Heaven')}>Heaven</button>
                 <button className="options-button" onClick={() => setGameEnvironment('Underwater')}>Underwater</button>
                 <button className="options-button" onClick={() => setGameEnvironment('Space')}>Space</button>
+                <button className="options-button" onClick={() => setGameEnvironment('Playstation 1')}>Playstation 1</button>
                 <button className="options-button" onClick={() => setSoundOn((curr) => !curr)}>Sound?</button>
             </div>
 
