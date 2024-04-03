@@ -36,7 +36,8 @@
 
 .leaderboard-button,
 .back-to-login-button,
-.logout-button {
+.logout-button,
+.options-button {
     padding: 15px 30px;
     font-size: 18px;
     background-color: #007bff;
@@ -49,6 +50,11 @@
 
 .leaderboard-button:hover,
 .back-to-login-button:hover,
-.logout-button:hover {
+.logout-button:hover,
+.options-button:hover {
     background-color: #27ae60;
+}
+
+.game-options-container {
+    display: flex;
 }

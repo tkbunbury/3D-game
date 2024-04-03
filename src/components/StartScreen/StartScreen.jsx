@@ -10,7 +10,7 @@ function StartScreen() {
     const navigate = useNavigate();
     const { currentUser, setUserLoggedIn, userLoggedIn } = useAuth();
 	const { user, users, setUser, setUsers, setCurrentScore } = useUser();
-    const {setAllWords} = useContext(GameStatsContext)
+    const {gameEnvironment, setGameEnvironment, setAllWords, soundOn, setSoundOn} = useContext(GameStatsContext)
 
     const handleLogout = () => {
         doSignOut(setUser, setUserLoggedIn);
@@ -30,7 +30,15 @@ function StartScreen() {
                 setAllWords([])
                 setCurrentScore(0)
                 navigate('/game')}}>Take Flight</button>
-            
+            <p>Level Selected: {gameEnvironment}</p>
+            <p>Sound? : {soundOn ? 'on' : 'muted'}</p>
+            <div className="game-options-container">
+                <button className="options-button" onClick={() => setGameEnvironment('Heaven')}>Heaven</button>
+                <button className="options-button" onClick={() => setGameEnvironment('Underwater')}>Underwater</button>
+                <button className="options-button" onClick={() => setGameEnvironment('Space')}>space</button>
+                <button className="options-button" onClick={() => setSoundOn((curr) => !curr)}>Sound?</button>
+            </div>
+
             {user.username ? 
                 <p>Your current high score is {user.highscore}</p> 
                 : 

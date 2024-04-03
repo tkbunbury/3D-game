@@ -4,9 +4,10 @@ import popSFX from '../../sounds/pop-sound.wav'
 import { useUser } from "../../Contexts/UserContext/userContext";
 import { extend } from '@react-three/fiber'
 import { useFrame } from "@react-three/fiber";
-import { useMemo } from "react";
+import { useMemo, useContext } from "react";
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js'
 import compareArrays from "../../utils/array-compare";
+import GameStatsContext from "../../Contexts/GameStatsContext/GameStatsContext";
 
 extend({ TextGeometry })
 
@@ -16,7 +17,8 @@ export function Targets(props){
     const { planePosition, newGuess, setNewGuess, guessesArray, setGuessesArray, gameBoardState, setGameBoardState, wordToGuess, lives, setLives, targets, setTargets } = props;
     const { currentScore } = useUser()
     const { setCurrentScore } = useUser()
-    const [playSound] = useSound(popSFX, {interrupt: false, playbackRate: 1})
+    const { gameEnvironment, setGameEnvironment, soundOn, setSoundOn} = useContext(GameStatsContext)
+    const [playSound] = useSound(popSFX, {interrupt: false, playbackRate: 1, soundEnabled: soundOn })
   
     const letterMap = useMemo(() => {
         const letterGeoArr = [];
