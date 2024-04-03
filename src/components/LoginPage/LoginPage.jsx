@@ -5,33 +5,31 @@ import { useUser } from "../../Contexts/UserContext/userContext";
 import { doSignOut } from "../firebase/auth";
 import "./LoginPage.css";
 import LoginButton from "./LoginButton/LoginButton";
-import SignupForm from "./SignUpForm/SignupForm";
+import SignupForm from "./SignupForm/SignupForm";
 import LoginForm from "./LoginForm/LoginForm";
 
 function LoginPage({ isCreatingAccount, setIsCreatingAccount }) {
   const { setUserLoggedIn, userLoggedIn } = useAuth();
   const { user, users, setUser, isLoading } = useUser();
-
+  
   const [showSignupForm, setShowSignupForm] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [topThreePlayersData, setTopThreePlayersData] = useState([]);
   const [playersPosition, setPlayersPosition] = useState();
   const [contendersData, setContendersData] = useState([]);
 
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
       if (!isLoading && user.username) {
         const tempUserPosition = users.findIndex((person) => person.username === user.username) + 1;
         setPlayersPosition(tempUserPosition);
-
         setTopThreePlayersData([
           { rank: 1, username: users[0].username, highscore: users[0].highscore },
           { rank: 2, username: users[1].username, highscore: users[1].highscore },
           { rank: 3, username: users[2].username, highscore: users[2].highscore },
         ]);
-
         if (user.username) {
           setContendersData([
             { rank: playersPosition - 1, username: users[playersPosition - 2].username, highscore: users[playersPosition - 2].highscore },
@@ -43,6 +41,10 @@ function LoginPage({ isCreatingAccount, setIsCreatingAccount }) {
     }
     fetchData();
   }, [users, user, isLoading, playersPosition]);
+
+	const handlePlayClick = () => {
+		navigate("/startscreen");
+	};
 
   const handleNewUserClick = () => {
     setShowSignupForm(true);
@@ -173,7 +175,7 @@ function LoginPage({ isCreatingAccount, setIsCreatingAccount }) {
 					label={userLoggedIn ? "Sign Out" : "Sign In"}
 					onClick={userLoggedIn ? handleSignOutClick : handleLoginClick}
 				/>
-				<LoginButton label="Play!" onClick={handleGuestClick} />
+				<LoginButton label="Play!" onClick={handlePlayClick} />
 			</div>
 				{showSignupForm && <SignupForm/>}
 				{showLoginForm && <LoginForm/>}

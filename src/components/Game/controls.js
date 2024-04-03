@@ -62,6 +62,16 @@ export let turbo = 0;
 
 export function updatePlaneAxis(x, y, z, planePosition, camera) {
 
+    if(Math.abs(planePosition.x) > 20 || Math.abs(planePosition.y) > 20 || Math.abs(planePosition.z) > 20){
+        jawVelocity = 0;
+        pitchVelocity = 0;
+        turbo = 0;
+        x.set( 1, 0, 0);
+        y.set( 0, 1, 0);
+        z.set( 0, 0, 1);
+        planePosition.set( 0, 3, 7);
+    }
+
     jawVelocity *= 0.90;
     pitchVelocity *= 0.90;
 
@@ -74,19 +84,19 @@ export function updatePlaneAxis(x, y, z, planePosition, camera) {
     }
 
     if (controls['left']) {
-        jawVelocity += 0.025;
+        jawVelocity += 0.015;
     }
 
     if (controls['right']) {
-        jawVelocity -= 0.025;
+        jawVelocity -= 0.015;
     }
 
     if (controls['down']) {
-        pitchVelocity += 0.01;
+        pitchVelocity += 0.005;
     }
 
     if (controls['up']) {
-        pitchVelocity -= 0.01;
+        pitchVelocity -= 0.005;
     }
 
     if (controls['r']){

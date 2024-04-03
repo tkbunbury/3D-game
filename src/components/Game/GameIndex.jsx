@@ -6,11 +6,15 @@ import { Vector3 } from 'three';
 import SphereEnv from './SphereEnv';
 import Airplane from './Airplane';
 import { Targets } from "./Targets";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { getRandomWord } from "../../utils/random-word-api"
 import { resetLetters } from "../../utils/reset-letters";
 import everyWord from "../../utils/random-word-array";
 import './GameIndex.css'
+const x = new Vector3(1, 0, 0);
+const y = new Vector3(0, 1, 0);
+const z = new Vector3(0, 0, 1);
+const xyzArr = [x,y,z]
 
 function GameIndex() {
 
@@ -21,11 +25,11 @@ function GameIndex() {
   const { currentScore, setCurrentScore } = useUser()
 
   const [planePosition, setPlanePosition] = useState(new Vector3(0, 3, 7));
-  
+  const [outOfBounds, setOutOfBounds] = useState(false)
   const [targets, setTargets] = useState([])
-
-  const [gameCount, setGameCount] = useState(1)
-  
+  const [previousWordHidden, setPreviousWordHidden] = useState('0')
+  const [gameCount, setGameCount] = useState(0)
+  const [previousWord, setPreviousWord] = useState()
   const [wordToGuess, setWordToGuess] = useState('')
   const [gameBoardState, setGameBoardState] = useState([])
   const [newGuess, setNewGuess] = useState('');
@@ -38,6 +42,8 @@ function GameIndex() {
   const [winLimiter, setWinLimiter] = useState(0)
 
   useEffect(() => {
+    setPreviousWord(wordToGuess)
+    
     setGameStarted(false)
     setIsError(false)
     setGivenError({})
@@ -55,8 +61,18 @@ function GameIndex() {
       setGuessesArray([])
       setTargets(resetLetters())
       setPlanePosition(new Vector3(0, 3, 7))
+      xyzArr[0].set( 1, 0, 0);
+      xyzArr[1].set( 0, 1, 0);
+      xyzArr[2].set( 0, 0, 1);
       setWinLimiter(0)
       setGameStarted(true)
+      if(gameCount > 0){
+        console.log(previousWord)
+        setPreviousWordHidden('1')
+        setTimeout(()=>{setPreviousWordHidden('0')}, 2500)
+        
+      }
+      setGameCount(gameCount + 1)
     }).catch((err) => {
       setGivenError(err)
       setIsError(true)
@@ -82,7 +98,9 @@ let lettersGuessed = 0
 if ((lettersGuessed === gameBoardState.length) && wordToGuess !== '' && winLimiter === 0){
   console.log('game won - resetting')
   setWinLimiter((curr) => curr + 1)
-  setToggleReset((curr) => !curr)}
+  setCurrentScore(currentScore + 200)
+  setToggleReset((curr) => !curr)
+}
 
 if (isError){
   return ( 
@@ -101,12 +119,20 @@ if (isError){
   return (
     <>
     <div className="game">
-    
     {gameStarted ? 
       <div id="overlay-container">
       <div id="overlay-top">
         <div id="gameboard">
           <h1>{gameBoardState}</h1>
+        </div>
+      </div>
+      <div id="overlay-mid">
+        {outOfBounds && <div className={'blink-me'} >
+          <h1> !! TURN BACK !! </h1>
+        </div>}
+        <div className={'guessed-correctly'} style={{opacity: previousWordHidden}}>
+          <h1>Word Guessed: {previousWord}</h1>
+          <h1>+200</h1>
         </div>
       </div>
       <div id="overlay-bot">
@@ -116,7 +142,7 @@ if (isError){
       </div>
     </div>
     : 
-    <></>
+    <><p id="give-it-a-second-message">give it a second...</p></>
     }
       <Suspense fallback={null}>
       <Canvas shadows>
@@ -127,7 +153,7 @@ if (isError){
             <meshStandardMaterial color="red" metalness={1} roughness={0}/>
           </Text3D>
           <Targets targets={targets} setTargets={setTargets} currentScore={currentScore} setCurrentScore={setCurrentScore} planePosition={planePosition} newGuess={newGuess} setNewGuess={setNewGuess} guessesArray={guessesArray} setGuessesArray={setGuessesArray} gameBoardState={gameBoardState} setGameBoardState={setGameBoardState} wordToGuess={wordToGuess} lives={lives} setLives={setLives}/>
-          <Airplane planePosition={planePosition} />
+          <Airplane planePosition={planePosition} xyzArr={xyzArr} outOfBounds={outOfBounds} setOutOfBounds ={setOutOfBounds}/>
       </Canvas>
       </Suspense>
       <Loader />
@@ -135,5 +161,6 @@ if (isError){
     </>
   );
 }
+
 
 export default GameIndex;

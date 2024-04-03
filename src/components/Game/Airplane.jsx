@@ -4,19 +4,25 @@ import { useFrame } from '@react-three/fiber';
 import { Matrix4, Quaternion, Vector3 } from 'three';
 import { updatePlaneAxis } from './controls';
 
-const x = new Vector3(1, 0, 0);
-const y = new Vector3(0, 1, 0);
-const z = new Vector3(0, 0, 1);
 
 const delayedRotMatrix = new Matrix4();
 const delayedQuaternion = new Quaternion();
 
-function Airplane({ planePosition }) {
-
+function Airplane({ planePosition, xyzArr, outOfBounds, setOutOfBounds }) {
+    
+    const x = xyzArr[0];
+    const y = xyzArr[1];
+    const z = xyzArr[2];
     const { scene } = useGLTF('/jet_gltf/scene.gltf');
     const airplaneRef = useRef();
 
     useFrame(({ camera }) => {
+        if(Math.abs(planePosition.x) > 15 || Math.abs(planePosition.y) > 15 || Math.abs(planePosition.z) > 15){
+            setOutOfBounds(true)
+        } else if(outOfBounds === true){
+            setOutOfBounds(false)
+        }
+
         updatePlaneAxis(x, y, z, planePosition, camera)
         const rotMatrix = new Matrix4().makeBasis(x, y, z)
         

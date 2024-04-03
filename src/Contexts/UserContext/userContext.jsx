@@ -27,7 +27,7 @@ export function UserProvider({ children }) {
 						const currentUserData = usersData.find(
 							(person) => person.email === currentUser.email
 						);
-						setUser(currentUserData);
+						setUser(currentUserData)
 					}
 					setIsLoading(false);
 				}
@@ -45,7 +45,7 @@ export function UserProvider({ children }) {
 		setUsers,
 		isLoading,
 		currentScore,
-		setCurrentScore,
+		setCurrentScore
 	};
 	return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
