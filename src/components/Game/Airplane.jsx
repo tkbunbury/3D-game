@@ -13,7 +13,7 @@ function Airplane({ planePosition, xyzArr, outOfBounds, setOutOfBounds }) {
     const x = xyzArr[0];
     const y = xyzArr[1];
     const z = xyzArr[2];
-    const { scene } = useGLTF('/jet_gltf/scene.gltf');
+    const { scene } = useGLTF('/jet_gltf_1/jetwithengine.gltf');
     const airplaneRef = useRef();
 
     useFrame(({ camera }) => {
