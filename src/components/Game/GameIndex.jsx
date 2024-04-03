@@ -1,5 +1,7 @@
 import { useState, useEffect, Suspense, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSound } from 'use-sound'
+import hornSFX from '../../sounds/mlg-airhorn.mp3'
 import { useUser } from "../../Contexts/UserContext/userContext";
 import { PerspectiveCamera, Environment, Text3D, Loader, Sparkles } from "@react-three/drei";
 import { Vector3 } from 'three';
@@ -42,10 +44,10 @@ function GameIndex() {
   const [givenError, setGivenError] = useState({})
   const [winLimiter, setWinLimiter] = useState(0)
   const {finalWord, setFinalWord, allWords, setAllWords, gameEnvironment, setGameEnvironment, soundOn, setSoundOn} = useContext(GameStatsContext)
+  const [playSound] = useSound(hornSFX, {interrupt: false, playbackRate: 1, soundEnabled: soundOn})
 
   useEffect(() => {
     setPreviousWord(wordToGuess)
-    
     setGameStarted(false)
     setIsError(false)
     setGivenError({})
@@ -71,6 +73,8 @@ function GameIndex() {
       setWinLimiter(0)
       setGameStarted(true)
       if(gameCount > 0){
+        setCurrentScore((curr) => curr + 200)
+        playSound()
         setPreviousWordHidden('1')
         setTimeout(()=>{setPreviousWordHidden('0')}, 2500)
         
@@ -100,8 +104,8 @@ let lettersGuessed = 0
 
 if ((lettersGuessed === gameBoardState.length) && wordToGuess !== '' && winLimiter === 0){
   console.log('game won - resetting')
+  
   setWinLimiter((curr) => curr + 1)
-  setCurrentScore(currentScore + 200)
   setToggleReset((curr) => !curr)
 }
 

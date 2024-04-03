@@ -77,7 +77,11 @@ function SphereEnv(){
         )
     }
     if (gameEnvironment === 'Space'){
-        const map = useTexture('assets/textures/spaceHDRI.jpeg');
+        let map
+        if(Math.floor((Math.random())*1000) === 420){
+            map = useTexture('assets/textures/edb.jpg');    
+        }
+        else {map = useTexture('assets/textures/spaceHDRI.jpeg')};
         return (
         <>
         <Sparkles
