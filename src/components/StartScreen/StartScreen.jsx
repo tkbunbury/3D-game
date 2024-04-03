@@ -3,16 +3,19 @@ import { useUser } from '../../Contexts/UserContext/userContext';
 import { useAuth } from "../../Contexts/AuthContext/authContext";
 import { doSignOut } from "../firebase/auth";
 import './StartScreen.css';
+import { useEffect } from 'react';
 
 function StartScreen() {
     const navigate = useNavigate();
     const { currentUser, setUserLoggedIn, userLoggedIn } = useAuth();
 	const { user, users, setUser, setUsers, setCurrentScore } = useUser();
 
+    useEffect(() => {
+        
+    }, [user])
+
     const handleLogout = () => {
-        doSignOut();
-		setUser({});
-		setUserLoggedIn(false);
+        doSignOut(setUser, setUserLoggedIn);
     };
 
     const handleBackToLogin = () => {
