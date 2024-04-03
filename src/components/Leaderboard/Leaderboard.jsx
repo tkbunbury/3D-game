@@ -12,6 +12,13 @@ function Leaderboard() {
 		{ rank: 1, username: users[0].username, highscore: users[0].highscore },
 		{ rank: 2, username: users[1].username, highscore: users[1].highscore },
 		{ rank: 3, username: users[2].username, highscore: users[2].highscore },
+		{ rank: 4, username: users[3].username, highscore: users[3].highscore },
+		{ rank: 5, username: users[4].username, highscore: users[4].highscore },
+		{ rank: 6, username: users[5].username, highscore: users[5].highscore },
+		{ rank: 7, username: users[6].username, highscore: users[6].highscore },
+		{ rank: 8, username: users[7].username, highscore: users[7].highscore },
+		{ rank: 9, username: users[8].username, highscore: users[8].highscore },
+		{ rank: 10, username: users[9].username, highscore: users[9].highscore },
 	];
 
 	const navigate = useNavigate();
