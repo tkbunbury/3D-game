@@ -17,6 +17,7 @@ export function UserProvider({ children }) {
 	const [currentScore, setCurrentScore] = useState(0)
 
 	useEffect(() => {
+		setIsLoading(true)
 		const fetchData = async () => {
 			const unsub = onSnapshot(
 				query(collection(db, "scores"), orderBy("highscore", "desc")),
