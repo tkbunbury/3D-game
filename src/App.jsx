@@ -8,7 +8,7 @@ import GameIndex from "./components/Game/GameIndex";
 import { useUser } from "./Contexts/UserContext/userContext";
 
 function App() {
-  const { user } = useUser()
+  const { user, users } = useUser()
   const [isCreatingAccount, setIsCreatingAccount] = useState(false);
 
   return (

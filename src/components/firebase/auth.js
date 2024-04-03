@@ -12,6 +12,8 @@ export const doSignInWithEmailAndPassword = (email, password) => {
 	return signInWithEmailAndPassword(auth, email, password);
 };
 
-export const doSignOut = () => {
+export const doSignOut = (setUser, setUserLoggedIn) => {
+	setUser({})
+	setUserLoggedIn(false)
 	return auth.signOut();
 };
