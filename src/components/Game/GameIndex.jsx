@@ -161,14 +161,6 @@ if (isError){
           </Text3D>
           <Targets targets={targets} setTargets={setTargets} currentScore={currentScore} setCurrentScore={setCurrentScore} planePosition={planePosition} newGuess={newGuess} setNewGuess={setNewGuess} guessesArray={guessesArray} setGuessesArray={setGuessesArray} gameBoardState={gameBoardState} setGameBoardState={setGameBoardState} wordToGuess={wordToGuess} lives={lives} setLives={setLives}/>
           <Airplane planePosition={planePosition} xyzArr={xyzArr} outOfBounds={outOfBounds} setOutOfBounds ={setOutOfBounds}/>
-          {motionBlur &&<EffectComposer>
-             <MotionBlur />
-            <HueSaturation
-              blendFunction={BlendFunction.NORMAL}
-              hue={-0.15}
-              saturation={0.1}
-            />
-          </EffectComposer>}
       </Canvas>
       </Suspense>
       <Loader />

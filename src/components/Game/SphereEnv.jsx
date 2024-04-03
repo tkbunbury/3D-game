@@ -12,11 +12,12 @@ import {
     HueSaturation,
     Pixelation
   } from "@react-three/postprocessing";
+import { MotionBlur } from './MotionBlur';
 
 
 function SphereEnv(){
 
-    const {gameEnvironment, setGameEnvironment} = useContext(GameStatsContext)
+    const {gameEnvironment, setGameEnvironment, motionBlur} = useContext(GameStatsContext)
     
     if (gameEnvironment === 'Heaven'){
         const map = useTexture('assets/textures/puresky.jpg');
@@ -30,6 +31,7 @@ function SphereEnv(){
             />
         </mesh>
         <EffectComposer multisampling={0} disableNormalPass={true}>
+        {motionBlur && <MotionBlur />}
         <Bloom
           luminanceThreshold={0}
           luminanceSmoothing={0.9}
@@ -61,6 +63,7 @@ function SphereEnv(){
             />
         </mesh>
         <EffectComposer multisampling={0} disableNormalPass={true}>
+        {motionBlur && <MotionBlur />}
         <DepthOfField
           focusDistance={0}
           focalLength={0.02}
@@ -103,6 +106,7 @@ function SphereEnv(){
             />
         </mesh>
         <EffectComposer multisampling={0} disableNormalPass={true}>
+        {motionBlur && <MotionBlur />}
         <Bloom
           luminanceThreshold={0.5}
           luminanceSmoothing={100}
@@ -125,6 +129,7 @@ function SphereEnv(){
             />
         </mesh>
         <EffectComposer multisampling={0} disableNormalPass={true}>
+        {motionBlur && <MotionBlur />}
         <Pixelation
         granularity={3}
         />

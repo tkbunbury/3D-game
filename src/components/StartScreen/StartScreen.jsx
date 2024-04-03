@@ -10,7 +10,7 @@ function StartScreen() {
     const navigate = useNavigate();
     const { currentUser, setUserLoggedIn, userLoggedIn } = useAuth();
 	const { user, users, setUser, setUsers, setCurrentScore } = useUser();
-    const {gameEnvironment, setGameEnvironment, setAllWords, soundOn, setSoundOn} = useContext(GameStatsContext)
+    const {gameEnvironment, setGameEnvironment, setAllWords, soundOn, setSoundOn, motionBlur, setMotionBlur } = useContext(GameStatsContext)
 
     const handleLogout = () => {
         doSignOut(setUser, setUserLoggedIn);
@@ -32,12 +32,14 @@ function StartScreen() {
                 navigate('/game')}}>Take Flight</button>
             <p>Level Selected: {gameEnvironment}</p>
             <p>Sound? : {soundOn ? 'on' : 'muted'}</p>
+            <p>Motion Blur? : {motionBlur ? 'on' : 'off'}</p>
             <div className="game-options-container">
                 <button className="options-button" onClick={() => setGameEnvironment('Heaven')}>Heaven</button>
                 <button className="options-button" onClick={() => setGameEnvironment('Underwater')}>Underwater</button>
                 <button className="options-button" onClick={() => setGameEnvironment('Space')}>Space</button>
                 <button className="options-button" onClick={() => setGameEnvironment('Playstation 1')}>Playstation 1</button>
                 <button className="options-button" onClick={() => setSoundOn((curr) => !curr)}>Sound?</button>
+                <button className="options-button" onClick={() => setMotionBlur((curr) => !curr)}>Motion Blur (on boost)?</button>
             </div>
 
             {user.username ? 
