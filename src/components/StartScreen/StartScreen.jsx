@@ -30,16 +30,17 @@ function StartScreen() {
                 <div id='left-options-container'>
                     <p>Levels:</p>
                     <button className="options-button" onClick={() => setGameEnvironment('Heaven')}>Heaven</button>
-                    <button className="options-button" onClick={() => setGameEnvironment('Underwater')}>Underwater</button>
                     <button className="options-button" onClick={() => setGameEnvironment('Space')}>Space</button>
+                    <button className="options-button" onClick={() => setGameEnvironment('Playstation 1')}>Playstation 1</button>
                 </div>
-                <button className="take-flight-button" onClick={() => {
-                    setAllWords([])
-                    setCurrentScore(0)
-                    navigate('/game')}}>Take Flight</button>
+                <div id='mid-options-container'>
+                    <button className="take-flight-button" onClick={() => {
+                        setAllWords([])
+                        setCurrentScore(0)
+                        navigate('/game')}}>Take Flight</button>
+                </div>
                 <div id='right-options-container'>
                     <p>Options:</p>
-                    <button className="options-button" onClick={() => setGameEnvironment('Playstation 1')}>Playstation 1</button>
                     <button className="options-button" onClick={() => setSoundOn((curr) => !curr)}>Sound?</button>
                     <button className="options-button" onClick={() => setMotionBlur((curr) => !curr)}>Motion Blur (on boost)?</button>
                 </div>
