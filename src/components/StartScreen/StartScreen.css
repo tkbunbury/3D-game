@@ -78,7 +78,8 @@
     background-color: #3498db;
     color: #fff;
     font-size: 24px;
-    font-weight: bold;
+    font-family: 'airstrike';
+    padding:0;
     cursor: pointer;
     border: 6px solid #ffffff;
     
