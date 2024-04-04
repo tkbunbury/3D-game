@@ -26,21 +26,27 @@ function StartScreen() {
             <p>You have five lives to guess the word at the top of the screen, collect a letter to make a guess. </p>
             <p>Use the arrow keys to change direction, shift for afterburners. If you get lost, use 'r' to reset.</p> 
             <p>Good Luck!</p>
-            <button className="take-flight-button" onClick={() => {
-                setAllWords([])
-                setCurrentScore(0)
-                navigate('/game')}}>Take Flight</button>
+            <div className="game-options-container">
+                <div id='left-options-container'>
+                    <p>Levels:</p>
+                    <button className="options-button" onClick={() => setGameEnvironment('Heaven')}>Heaven</button>
+                    <button className="options-button" onClick={() => setGameEnvironment('Underwater')}>Underwater</button>
+                    <button className="options-button" onClick={() => setGameEnvironment('Space')}>Space</button>
+                </div>
+                <button className="take-flight-button" onClick={() => {
+                    setAllWords([])
+                    setCurrentScore(0)
+                    navigate('/game')}}>Take Flight</button>
+                <div id='right-options-container'>
+                    <p>Options:</p>
+                    <button className="options-button" onClick={() => setGameEnvironment('Playstation 1')}>Playstation 1</button>
+                    <button className="options-button" onClick={() => setSoundOn((curr) => !curr)}>Sound?</button>
+                    <button className="options-button" onClick={() => setMotionBlur((curr) => !curr)}>Motion Blur (on boost)?</button>
+                </div>
+            </div>
             <p>Level Selected: {gameEnvironment}</p>
             <p>Sound? : {soundOn ? 'on' : 'muted'}</p>
             <p>Motion Blur? : {motionBlur ? 'on' : 'off'}</p>
-            <div className="game-options-container">
-                <button className="options-button" onClick={() => setGameEnvironment('Heaven')}>Heaven</button>
-                <button className="options-button" onClick={() => setGameEnvironment('Underwater')}>Underwater</button>
-                <button className="options-button" onClick={() => setGameEnvironment('Space')}>Space</button>
-                <button className="options-button" onClick={() => setGameEnvironment('Playstation 1')}>Playstation 1</button>
-                <button className="options-button" onClick={() => setSoundOn((curr) => !curr)}>Sound?</button>
-                <button className="options-button" onClick={() => setMotionBlur((curr) => !curr)}>Motion Blur (on boost)?</button>
-            </div>
 
             {user.username ? 
                 <p>Your current high score is {user.highscore}</p> 
