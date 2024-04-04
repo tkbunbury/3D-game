@@ -12,6 +12,8 @@ body{
   min-width: 320px;
 }
 
+
+
 @font-face {
   font-family: 'hanging-letters';
   src: url('../public/fonts/hanged-letters.ttf');
@@ -20,6 +22,11 @@ body{
 @font-face {
   font-family: 'skyrim';
   src: url('../public/fonts/Skyrim-Font.ttf');
+}
+
+@font-face {
+  font-family: 'airstrike';
+  src: url('../public/fonts/airstrike.ttf');
 }
 
 a {

@@ -28,7 +28,7 @@
     background-color: limegreen;
     color: #fff;
     font-size: 24px;
-    font-weight: bold;
+    font-family: 'airstrike';
     cursor: pointer;
     margin-bottom: 20px;
     border: 6px solid #ffffff;
@@ -47,7 +47,7 @@
 }
 
 .fly-again-button:hover {
-    background-color: #2980b9;
+    background-color: red;
 }
 
 .leaderboard-button:hover, 
