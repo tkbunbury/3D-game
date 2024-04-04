@@ -10,7 +10,7 @@ function StartScreen() {
     const navigate = useNavigate();
     const { currentUser, setUserLoggedIn, userLoggedIn } = useAuth();
 	const { user, users, setUser, setUsers, setCurrentScore } = useUser();
-    const {gameEnvironment, setGameEnvironment, setAllWords, soundOn, setSoundOn, motionBlur, setMotionBlur } = useContext(GameStatsContext)
+    const {gameEnvironment, setGameEnvironment, setAllWords, soundOn, setSoundOn, motionBlur, setMotionBlur, isHardMode, setIsHardMode } = useContext(GameStatsContext)
 
     const handleLogout = () => {
         doSignOut(setUser, setUserLoggedIn);
@@ -43,11 +43,13 @@ function StartScreen() {
                     <p>Options:</p>
                     <button className="options-button" onClick={() => setSoundOn((curr) => !curr)}>Sound?</button>
                     <button className="options-button" onClick={() => setMotionBlur((curr) => !curr)}>Motion Blur (on boost)?</button>
+                    <button className="options-button" onClick={() => setIsHardMode((curr) => !curr)}>Hard Mode? (5 lives ONLY)</button>
                 </div>
             </div>
             <p>Level Selected: {gameEnvironment}</p>
             <p>Sound? : {soundOn ? 'on' : 'muted'}</p>
             <p>Motion Blur? : {motionBlur ? 'on' : 'off'}</p>
+            <p>Hard mode : {isHardMode ? 'on' : 'off' }</p>
 
             {user.username ? 
                 <p>Your current high score is {user.highscore}</p> 

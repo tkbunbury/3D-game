@@ -11,13 +11,14 @@ import { useState } from "react";
 function App() {
   const { user } = useUser()
   const [finalWord, setFinalWord] = useState('')
+  const [isHardMode, setIsHardMode] = useState(false)
   const [allWords, setAllWords] = useState([])
   const [soundOn, setSoundOn] = useState(true)
   const [gameEnvironment, setGameEnvironment] = useState('Heaven')
   const [motionBlur, setMotionBlur] = useState(false)
   
   return (
-    <GameStatsContext.Provider value={{finalWord, setFinalWord, allWords, setAllWords, gameEnvironment, setGameEnvironment, soundOn, setSoundOn, motionBlur, setMotionBlur }}>
+    <GameStatsContext.Provider value={{finalWord, setFinalWord, allWords, setAllWords, gameEnvironment, setGameEnvironment, soundOn, setSoundOn, motionBlur, setMotionBlur, isHardMode, setIsHardMode }}>
     <div className="container">
       <Link to="/">
         <h1 className="game-title">Hangman Heaven</h1>

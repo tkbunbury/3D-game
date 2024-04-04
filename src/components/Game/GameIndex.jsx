@@ -46,7 +46,7 @@ function GameIndex() {
   const [isError, setIsError]  = useState(false)
   const [givenError, setGivenError] = useState({})
   const [winLimiter, setWinLimiter] = useState(0)
-  const {finalWord, setFinalWord, allWords, setAllWords, gameEnvironment, setGameEnvironment, soundOn, setSoundOn, motionBlur, setMotionBlur} = useContext(GameStatsContext)
+  const {finalWord, setFinalWord, allWords, setAllWords, gameEnvironment, setGameEnvironment, soundOn, setSoundOn, motionBlur, setMotionBlur, isHardMode} = useContext(GameStatsContext)
   const [playSound] = useSound(hornSFX, {interrupt: false, playbackRate: 1, soundEnabled: soundOn})
 
   useEffect(() => {
@@ -76,6 +76,9 @@ function GameIndex() {
       setWinLimiter(0)
       setGameStarted(true)
       if(gameCount > 0){
+        if (!isHardMode){
+          setLives(5)
+        }
         setCurrentScore((curr) => curr + 200)
         playSound()
         setPreviousWordHidden('1')
