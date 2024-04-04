@@ -2,9 +2,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    
+    width:70vw;
+    padding-bottom:20px;
+    h1{
+        font-family:'skyrim';
+        margin:0px;
+        margin-bottom:10px;
+    }
+    p{
+        font-size:15px;
+        margin-top:0px;
+        margin-bottom:5px;
+    }
 }
 
 .welcome-message {
@@ -18,20 +27,19 @@
 }
 
 .take-flight-button {
-    width: 200px;
-    height: 200px;
+    min-width: 200px;
+    min-height: 200px;
     border-radius: 50%;
     background-color: #3498db;
     color: #fff;
     font-size: 24px;
     font-weight: bold;
     cursor: pointer;
-    margin-bottom: 20px;
     border: 6px solid #ffffff;
 }
 
 .take-flight-button:hover {
-    background-color: #2980b9;
+    background-color: red;
 }
 
 .leaderboard-button,
@@ -55,6 +63,41 @@
     background-color: #27ae60;
 }
 
+.options-button{
+    font-family:'skyrim';
+    width: auto;
+    background-color: gray;
+    border-radius: 0;
+    border:solid 2px white;
+    margin:2px 2px 2px 2px;
+}
+
+.options-button:hover{
+    color:black;
+    background-color: white;
+}
+
 .game-options-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#left-options-container{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30%;
+    padding-right:20px;
+}
+
+#right-options-container{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30%;
+    padding-left:20px;
 }
