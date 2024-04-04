@@ -1,6 +1,5 @@
 .game {
   width: 80vw;
-  height: 80vh;
   overflow: hidden;
   margin: 0;
   border-style: solid;
@@ -31,7 +30,7 @@
 
 }
 #overlay-top{
-  top:8%;
+  top:15%;
   justify-content: center;
 }
 
@@ -43,7 +42,7 @@
 
 #overlay-bot{
   justify-content: space-between;
-  bottom:12%;
+  bottom:3%;
 }
 
 .guessed-correctly {

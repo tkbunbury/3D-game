@@ -20,7 +20,7 @@ function App() {
     <GameStatsContext.Provider value={{finalWord, setFinalWord, allWords, setAllWords, gameEnvironment, setGameEnvironment, soundOn, setSoundOn, motionBlur, setMotionBlur }}>
     <div className="container">
       <Link to="/">
-        <h1 className="game-title">Hangman Heaven {user.username && " - " + user.username}</h1>
+        <h1 className="game-title">Hangman Heaven</h1>
       </Link>
       <Routes>
         <Route
