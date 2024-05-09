@@ -47,7 +47,7 @@ Click the link that appears in YOUR terminal e.g. (http://localhost:5173/) to vi
 
 ## Authors
 
-Takai Bunbury - [GitHub Profile](https://github.com/tkbunbury)
-Joe Durkan - [GitHub Profile](https://github.com/JoeDurks94) 
-Lewis Brown - [GitHub Profile](https://github.com/lgb94) 
-Zia Gorospe - [GitHub Profile](https://github.com/ziagorospe)  
+- [Takai Bunbury](https://github.com/tkbunbury)
+- [Joe Durkan](https://github.com/JoeDurks94)
+- [Lewis Brown](https://github.com/lgb94)
+- [Zia Gorospe](https://github.com/ziagorospe)
